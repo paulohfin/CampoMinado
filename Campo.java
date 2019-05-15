@@ -71,7 +71,7 @@ public class Campo extends javax.swing.JLabel{
 		
 			this.jogado = true;
 			if(this.mina){
-				ImageIcon icon = new ImageIcon("CampoMinado/fig/bomba.jpg");
+				ImageIcon icon = new ImageIcon("CampoMinado/fig/bomba.png");
 				Image image = icon.getImage();
 				icon = new ImageIcon(image.getScaledInstance(38,38, java.awt.Image.SCALE_SMOOTH));
 				this.setIcon(icon);
@@ -81,6 +81,26 @@ public class Campo extends javax.swing.JLabel{
 				int n = this.tab.busca(this.x, this.y);
 				if(n > 0)
 					this.setText("" + n);
+				else{
+					if(this.x > 0){
+						if(this.y > 0)
+							tab.campo[this.x - 1][this.y - 1].botaoEsquerdo();
+						if(this.y < tab.getY() - 1)
+							tab.campo[this.x - 1][this.y + 1].botaoEsquerdo();
+						tab.campo[this.x - 1][this.y].botaoEsquerdo();
+					}
+					if(this.x < tab.getX() - 1){
+						if(this.y > 0)
+							tab.campo[this.x + 1][this.y - 1].botaoEsquerdo();
+						if(this.y < tab.getY() - 1)
+							tab.campo[this.x + 1][this.y + 1].botaoEsquerdo();
+						tab.campo[this.x + 1][this.y].botaoEsquerdo();
+					}
+					if(this.y > 0)
+						tab.campo[this.x][this.y - 1].botaoEsquerdo();
+					if(this.y < tab.getY() - 1)
+						tab.campo[this.x][this.y + 1].botaoEsquerdo();
+				}
 				this.setBackground(new Color(211,211,211));
 			}
 		}
@@ -90,7 +110,7 @@ public class Campo extends javax.swing.JLabel{
 	*/
 	public void botaoDireito(){
 		if(!this.tab.getPerdeu() && !this.jogado)
-			if(!this.marcador){ImageIcon icon = new ImageIcon("CampoMinado/fig/bandeira.jpg");
+			if(!this.marcador){ImageIcon icon = new ImageIcon("CampoMinado/fig/bandeira.png");
 				Image image = icon.getImage();
 				icon = new ImageIcon(image.getScaledInstance(38,38, java.awt.Image.SCALE_SMOOTH));
 				this.setIcon(icon);		
