@@ -13,7 +13,7 @@ import javax.swing.*;
 public class Tabuleiro extends javax.swing.JFrame{
 	
 	//Atributos da classe
-	private Campo [][] campo;
+	Campo [][] campo;
 	private int x, y;
 	private boolean perdeu;
 	
@@ -95,5 +95,11 @@ public class Tabuleiro extends javax.swing.JFrame{
 	}
 	public void setPerdeu(){
 		this.perdeu = true;
+	}
+	public int getX(){
+		return this.x;
+	}
+	public int getY(){
+		return this.y;
 	}
 }
