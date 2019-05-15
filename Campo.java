@@ -2,8 +2,7 @@ package CampoMinado;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -76,6 +75,7 @@ public class Campo extends javax.swing.JLabel{
 				icon = new ImageIcon(image.getScaledInstance(38,38, java.awt.Image.SCALE_SMOOTH));
 				this.setIcon(icon);
 				this.tab.setPerdeu();
+				this.tab.setTextResult("PERDEU!!");
 			}
 			else{
 				int n = this.tab.busca(this.x, this.y);
@@ -103,6 +103,10 @@ public class Campo extends javax.swing.JLabel{
 				}
 				this.setBackground(new Color(211,211,211));
 			}
+			if(this.tab.ganhou()){
+				this.tab.setPerdeu();
+				this.tab.setTextResult("GANHOU!!");
+			}
 		}
 	}
 	/*
@@ -120,5 +124,8 @@ public class Campo extends javax.swing.JLabel{
 				this.setIcon(null);
 				this.marcador = false;
 			}
+	}
+	public boolean getJogado(){
+		return this.jogado;
 	}
 }
