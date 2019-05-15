@@ -1,9 +1,7 @@
 package CampoMinado;
 
-
 import java.awt.Color;
 import javax.swing.*;
-
 
 /**
  *
@@ -14,8 +12,9 @@ public class Tabuleiro extends javax.swing.JFrame{
 	
 	//Atributos da classe
 	Campo [][] campo;
-	private int x, y;
+	private int x, y, bomba;
 	private boolean perdeu;
+	private JLabel msg;
 	
 	/*
 	* Construtor da classe
@@ -28,6 +27,7 @@ public class Tabuleiro extends javax.swing.JFrame{
 		campo = new Campo[x][y];
 		this.x = x;
 		this.y = y;
+		this.bomba = bomba;
 		this.perdeu = false;
 		
 		for(int i = 0; i < x; i++)
@@ -47,8 +47,13 @@ public class Tabuleiro extends javax.swing.JFrame{
 				bomba--;
 			}
 		}
+		this.msg = new JLabel();
+		this.msg.setBounds((this.x * 40)/2, (this.y * 40) + 75, 100, 30);
+		this.msg.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(msg);
+		
 		this.setLayout(null);
-		this.setSize(100 + this.x * 40,150 + this.y * 40);
+		this.setSize(100 + this.x * 40,200 + this.y * 40);
 		this.setVisible(true);
 	}
 	/*
@@ -101,5 +106,19 @@ public class Tabuleiro extends javax.swing.JFrame{
 	}
 	public int getY(){
 		return this.y;
+	}
+	public void setTextResult(String txt){
+		this.msg.setText(txt);
+	}
+	public boolean ganhou(){
+		int cont = this.x * this.y;
+		
+		for(int i = 0; i < this.x; i++)
+			for(int j = 0; j < this.y; j++)
+				if(campo[i][j].getJogado())
+					cont --;
+		if(cont == this.bomba)
+			return true;
+		else return false;
 	}
 }
